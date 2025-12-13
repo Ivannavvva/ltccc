@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LTC | Muebles como nuevos en horas</title>
+    <meta name="description" content="Servicio de limpieza premium para salas y tapetes. Secado rápido, sin ácaros y garantía por escrito. ¡Cotiza en segundos!">
+
+    <!-- Fuentes: Nunito (Vibe Amigable) y Poppins (Legibilidad) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#26C6DA',     /* Principal: Cyan Vibrante */
+                            action: '#FF6E40',   /* Acción: Naranja Suave (Botón Principal) */
+                            fun: '#FFD740',      /* Diversión: Amarillo Soleado */
+                            dark: '#006064',     /* Contraste oscuro */
+                            light: '#F3F4F6',    /* Gris base */
+                            surface: '#FFFFFF'
+                        },
+                        whatsapp: '#25D366'      /* Verde Oficial WhatsApp */
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        heading: ['Nunito', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                        'blob': '40% 60% 70% 30% / 40% 50% 60% 50%',
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(38, 198, 218, 0.2)',
+                        'card': '0 10px 30px -5px rgba(0, 0, 0, 0.05)',
+                        'action': '0 10px 25px -5px rgba(255, 110, 64, 0.5)', /* Sombra Naranja */
+                        'whatsapp': '0 10px 25px -5px rgba(37, 211, 102, 0.5)', /* Sombra WhatsApp */
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        body { font-family: 'Poppins', sans-serif; }
+        h1, h2, h3, h4, .btn-text { font-family: 'Nunito', sans-serif; }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* Blob Background Animation */
+        @keyframes moveBlob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .blob-anim {
+            animation: moveBlob 7s infinite alternate;
+        }
+
+        /* Button Pulse (Orange) */
+        @keyframes actionPulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 110, 64, 0.7); transform: scale(1); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 110, 64, 0); transform: scale(1.03); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 110, 64, 0); transform: scale(1); }
+        }
+        .btn-pulse { animation: actionPulse 2s infinite; }
+
+        /* Button Pulse (WhatsApp Green) */
+        @keyframes whatsappPulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); transform: scale(1); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); transform: scale(1.03); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); transform: scale(1); }
+        }
+        .btn-whatsapp-pulse { animation: whatsappPulse 2s infinite; }
+
+        /* Liquid Wave Shape */
+        .wave-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+        .wave-bottom svg {
+            position: relative;
+            display: block;
+            width: calc(143% + 1.3px);
+            height: 80px;
+        }
+        .wave-bottom .shape-fill { fill: #FFFFFF; }
+
+        /* Emoji bounce */
+        .emoji-float { display: inline-block; animation: float 3s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+    </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-brand-light text-slate-700 antialiased overflow-x-hidden">
+
+    <!-- 1. HEADER (Sticky & Glass) -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 glass-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center group" onclick="window.scrollTo(0,0)">
+                    <img src="./logo.webp" 
+                         alt="LTC Logo" 
+                         class="h-12 w-auto object-contain transition transform group-hover:scale-105"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <!-- Fallback en caso de que la imagen falle -->
+                    <span class="hidden font-heading font-black text-2xl text-brand-cyan tracking-tighter">LTC</span>
+                </a>
+
+                <!-- CTA Header Desktop -->
+                <div class="hidden md:flex items-center gap-6">
+                    <span class="text-sm font-medium text-slate-500 flex items-center gap-2">
+                        <i class="fa-solid fa-star text-brand-fun"></i> 300+ Reseñas 5 Estrellas
+                    </span>
+                    
+                    <!-- Botón WhatsApp (Secundario en Nav) -->
+                    <button onclick="openLocationModal('whatsapp')" class="flex items-center gap-2 text-whatsapp font-bold hover:text-green-600 transition">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Cotizar
+                    </button>
+
+                    <!-- Botón Principal: Agendar ahora (Naranja Solicitado) -->
+                    <button onclick="openLocationModal('phone')" 
+                       class="bg-brand-action hover:bg-orange-600 text-white px-6 py-2.5 rounded-full font-bold shadow-action transform hover:-translate-y-0.5 transition flex items-center gap-2 cursor-pointer">
+                        Agendar ahora <i class="fa-solid fa-calendar-check"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Button -->
+                <div class="md:hidden">
+                    <button onclick="openLocationModal('whatsapp')" class="text-whatsapp font-black text-4xl drop-shadow-sm">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. HERO SECTION (Clean & Cheerful) -->
+    <header class="relative pt-32 pb-24 lg:pt-48 lg:pb-40 bg-brand-cyan overflow-hidden">
+        <!-- Blobs decorativos de fondo -->
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-white opacity-10 rounded-full blur-3xl blob-anim"></div>
+        <div class="absolute bottom-[20%] right-[-5%] w-80 h-80 bg-brand-fun opacity-20 rounded-full blur-3xl blob-anim" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                
+                <!-- Copy Hero -->
+                <div class="text-center lg:text-left text-white" data-aos="fade-up">
+                    <div class="inline-block bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-4 py-1.5 mb-6">
+                        <span class="text-sm font-bold text-white tracking-wide uppercase flex items-center gap-2">
+                            <i class="fa-solid fa-sparkles text-brand-fun"></i> Calidad Premium Garantizada
+                        </span>
+                    </div>
+                    
+                    <h1 class="font-heading font-black text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6 drop-shadow-sm">
+                        ¡Tus muebles como nuevos otra vez! <span class="emoji-float">✨</span>
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl text-white/90 font-medium mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Eliminamos manchas, ácaros y malos olores. Secado rápido en <strong>3-6 horas</strong>. Tu hogar limpio y saludable hoy mismo.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <!-- Botón 1: Principal (Agendar - Naranja) -->
+                        <button onclick="openLocationModal('phone')" 
+                           class="btn-pulse w-full sm:w-auto bg-brand-action hover:bg-orange-600 text-white text-lg font-bold py-4 px-8 rounded-2xl shadow-action transition flex items-center justify-center gap-3 border border-white/20">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            Agendar ahora
+                        </button>
+
+                        <!-- Botón 2: WhatsApp (Striking Green) -->
+                        <button onclick="openLocationModal('whatsapp')" 
+                           class="w-full sm:w-auto bg-whatsapp hover:bg-green-600 text-white text-lg font-bold py-4 px-8 rounded-2xl shadow-whatsapp transform hover:-translate-y-1 transition flex items-center justify-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            Cotizar por WhatsApp
+                        </button>
+                    </div>
+
+                    <div class="mt-8 flex items-center justify-center lg:justify-start gap-2 text-sm font-medium text-white/80">
+                        <i class="fa-solid fa-shield-check"></i> Garantía por escrito de 24 horas
+                    </div>
+                </div>
+
+                <!-- Imagen Hero (Friendly & Trust) -->
+                <div class="relative lg:h-[500px] flex justify-center items-center" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="relative z-10 w-full max-w-md">
+                        <!-- Imagen principal con Fallback inteligente -->
+                        <img src="./img/hero-principal.webp" 
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80';"
+                             alt="Limpieza profesional LTC" 
+                             class="rounded-[2rem] shadow-2xl border-4 border-white transform rotate-2 hover:rotate-0 transition duration-500 w-full object-cover h-80 sm:h-96">
+                        
+                        <!-- Badge Flotante 1 -->
+                        <div class="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce" style="animation-duration: 3s;">
+                            <div class="bg-green-100 w-10 h-10 rounded-full flex items-center justify-center text-green-500 text-xl">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 font-bold uppercase">Secado</p>
+                                <p class="text-slate-800 font-bold">Rápido 3-6hrs</p>
+                            </div>
+                        </div>
+
+                        <!-- Badge Flotante 2 -->
+                        <div class="absolute -bottom-6 -left-6 bg-brand-fun p-4 rounded-2xl shadow-xl flex items-center gap-3 transform -rotate-2">
+                             <div class="bg-white/30 w-10 h-10 rounded-full flex items-center justify-center text-slate-800 text-xl">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div>
+                                <p class="text-slate-800 font-black text-2xl leading-none">4.9</p>
+                                <p class="text-slate-900 text-xs font-bold uppercase">En Google</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wave Divider -->
+        <div class="wave-bottom">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- 3. TRUST BAR -->
+    <section class="bg-white py-8 -mt-2 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition duration-500">
+            <div class="flex items-center gap-2">
+                <i class="fa-brands fa-google text-2xl"></i> <span class="font-bold text-slate-600">Verificado</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-house-chimney-medical text-2xl"></i> <span class="font-bold text-slate-600">+15k Servicios</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-users text-2xl"></i> <span class="font-bold text-slate-600">Personal Confiable</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. BENEFICIOS (Why Us?) -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="font-heading font-black text-3xl md:text-4xl text-slate-800 mb-4">
+                    Tu sala es el corazón de tu hogar <span class="text-brand-action">cuídala ❤️</span>
+                </h2>
+                <p class="text-slate-500 text-lg">
+                    Sabemos que amas tu hogar. Por eso usamos tecnología que limpia a profundidad sin dañar las telas ni mojar de más.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-slate-50 rounded-3xl p-8 shadow-card hover:shadow-soft transition duration-300 border border-transparent hover:border-brand-cyan/20 group text-center" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-20 h-20 mx-auto bg-white rounded-full flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition shadow-sm">
+                        🦠
+                    </div>
+                    <h3 class="font-heading font-bold text-xl text-brand-dark mb-3">Adiós Ácaros y Bacterias</h3>
+                    <p class="text-slate-500">Eliminamos el 99% de alérgenos que causan enfermedades respiratorias. Ideal para niños y mascotas.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-slate-50 rounded-3xl p-8 shadow-card hover:shadow-soft transition duration-300 border border-transparent hover:border-brand-cyan/20 group text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-20 h-20 mx-auto bg-white rounded-full flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition shadow-sm">
+                        🚀
+                    </div>
+                    <h3 class="font-heading font-bold text-xl text-brand-dark mb-3">Tecnología Rápida</h3>
+                    <p class="text-slate-500">Sistema de inyección-succión industrial. Tu sala estará seca y lista para usarse en 3 a 6 horas.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-slate-50 rounded-3xl p-8 shadow-card hover:shadow-soft transition duration-300 border border-transparent hover:border-brand-cyan/20 group text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-20 h-20 mx-auto bg-white rounded-full flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition shadow-sm">
+                        🌱
+                    </div>
+                    <h3 class="font-heading font-bold text-xl text-brand-dark mb-3">100% Seguro</h3>
+                    <p class="text-slate-500">Usamos productos biodegradables con pH neutro. No tóxicos, no corrosivos y con aroma fresco.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CHECKLIST PREMIUM (Reference Image Style) -->
+    <section class="py-16 bg-brand-cyan relative overflow-hidden">
+        <!-- Decoracion -->
+        <!-- Fondo actualizado a ruta local con fallback -->
+        <div class="absolute inset-0 z-0">
+             <img src="./img/patron-fondo.png" 
+                  onerror="this.style.display='none'"
+                  class="w-full h-full object-cover opacity-10" 
+                  alt="textura">
+        </div>
+        
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl flex flex-col md:flex-row gap-12 items-center">
+                
+                <div class="flex-1 space-y-6">
+                    <div class="inline-block bg-brand-fun text-slate-800 font-bold px-4 py-1 rounded-full text-sm uppercase tracking-wider mb-2">
+                        La Favorita de todos ⭐
+                    </div>
+                    <h2 class="font-heading font-black text-3xl md:text-4xl text-slate-800 leading-tight">
+                        Limpieza Premium <br> <span class="text-brand-cyan">Todo Incluido</span>
+                    </h2>
+                    <p class="text-slate-500">
+                        No te confundas con paquetes complicados. Nuestro servicio estándar es <strong>Premium</strong>. Incluimos todo lo necesario para revivir tus muebles.
+                    </p>
+                    
+                    <button onclick="openLocationModal('phone')" class="hidden md:inline-flex bg-brand-action hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-2xl shadow-action transition items-center gap-3">
+                        Agendar ahora
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </button>
+                </div>
+
+                <div class="flex-1 w-full bg-brand-light/50 p-6 rounded-3xl border border-brand-cyan/10">
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4 p-2 bg-white rounded-xl shadow-sm">
+                            <div class="bg-green-100 text-green-500 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-check"></i></div>
+                            <span class="font-bold text-slate-700">Aspirado Profundo Industrial</span>
+                        </li>
+                        <li class="flex items-center gap-4 p-2 bg-white rounded-xl shadow-sm">
+                            <div class="bg-green-100 text-green-500 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-check"></i></div>
+                            <span class="font-bold text-slate-700">Lavado Inyección-Succión</span>
+                        </li>
+                        <li class="flex items-center gap-4 p-2 bg-white rounded-xl shadow-sm">
+                            <div class="bg-green-100 text-green-500 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-check"></i></div>
+                            <span class="font-bold text-slate-700">Desinfección Química</span>
+                        </li>
+                        <li class="flex items-center gap-4 p-2 bg-white rounded-xl shadow-sm">
+                            <div class="bg-green-100 text-green-500 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-check"></i></div>
+                            <span class="font-bold text-slate-700">Tratamiento de Manchas Difíciles</span>
+                        </li>
+                        <li class="flex items-center gap-4 p-2 bg-white rounded-xl shadow-sm">
+                            <div class="bg-green-100 text-green-500 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-check"></i></div>
+                            <span class="font-bold text-slate-700">Tratamiento de Malos Olores</span>
+                        </li>
+                        <li class="flex items-center gap-4 p-2 bg-white rounded-xl shadow-sm opacity-100">
+                            <div class="bg-brand-fun text-slate-800 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-shield-halved"></i></div>
+                            <span class="font-bold text-slate-800">Garantía de Satisfacción 24h</span>
+                        </li>
+                    </ul>
+                    
+                    <button onclick="openLocationModal('phone')" class="md:hidden w-full mt-6 bg-brand-action hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-2xl shadow-action transition flex items-center justify-center gap-3">
+                        Agendar ahora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FINAL CTA -->
+    <section class="py-20 bg-white text-center">
+        <div class="max-w-4xl mx-auto px-4" data-aos="zoom-in">
+            <h2 class="font-heading font-black text-4xl sm:text-5xl text-slate-800 mb-6">
+                ¿Listo para renovar tu hogar? 🛋️
+            </h2>
+            <p class="text-xl text-slate-500 mb-10">
+                Cotiza en menos de 1 minuto. Sin compromisos.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="openLocationModal('whatsapp')" 
+                   class="btn-whatsapp-pulse bg-whatsapp hover:bg-green-600 text-white font-bold py-5 px-10 rounded-2xl shadow-whatsapp text-xl transition flex items-center justify-center gap-3">
+                    <i class="fa-brands fa-whatsapp text-3xl"></i>
+                    Enviar WhatsApp
+                </button>
+            </div>
+            
+            <p class="mt-6 text-sm text-slate-400">
+                Atendemos Monterrey y Querétaro.
+            </p>
+        </div>
+    </section>
+
+    <!-- 7. TESTIMONIALS (Social Proof) -->
+    <section class="py-20 bg-slate-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm mb-4 border border-brand-cyan/20">
+                    <span class="text-brand-action font-bold text-lg">+14 mil</span>
+                    <span class="text-slate-500 text-sm font-medium">Clientes Felices</span>
+                </div>
+                <h2 class="font-heading font-black text-3xl md:text-5xl text-slate-800 mb-4">
+                    Ellos ya disfrutan de un <br><span class="text-brand-cyan">hogar limpio</span> 💬
+                </h2>
+                <p class="text-slate-400 text-lg">Reseñas reales de nuestros clientes en redes sociales</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-card hover:shadow-lg transition duration-300 border border-slate-100" data-aos="fade-up" data-aos-delay="0">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                             <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold text-xl">MM</div>
+                             <div>
+                                 <h4 class="font-bold text-slate-800">Mary Morales</h4>
+                                 <p class="text-xs text-slate-400 flex items-center gap-1"><i class="fa-solid fa-star text-brand-fun"></i> Recomendado</p>
+                             </div>
+                        </div>
+                        <i class="fa-brands fa-facebook text-blue-500 text-2xl opacity-50"></i>
+                    </div>
+                    <p class="text-slate-600 italic leading-relaxed mb-4">
+                        "Altamente recomendables, los contacte en domingo y respondieron rápido y me agendaron para el día lunes, el personal llego unos minutos antes de la cita, rolando y ángel profesionales y atentos. La sala quedo con un aroma agradable y limpia."
+                    </p>
+                    <div class="flex items-center justify-end text-sm text-red-500 font-bold gap-1">
+                        <i class="fa-solid fa-heart"></i> Me encanta
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-card hover:shadow-lg transition duration-300 border border-slate-100" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                             <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xl">DG</div>
+                             <div>
+                                 <h4 class="font-bold text-slate-800">Daniel Gonzalez</h4>
+                                 <p class="text-xs text-slate-400 flex items-center gap-1"><i class="fa-solid fa-star text-brand-fun"></i> Recomendado</p>
+                             </div>
+                        </div>
+                        <i class="fa-brands fa-facebook text-blue-500 text-2xl opacity-50"></i>
+                    </div>
+                    <p class="text-slate-600 italic leading-relaxed mb-4">
+                        "Excelente servicio los contraté para limpieza de mi sala de 3 piezas, gracias a Rolando y Angel que fueron muy profesionales mi sala quedó muy limpia y con buen aroma los recomiendo 100%"
+                    </p>
+                     <div class="flex items-center justify-end text-sm text-red-500 font-bold gap-1">
+                        <i class="fa-solid fa-heart"></i> Me encanta
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-card hover:shadow-lg transition duration-300 border border-slate-100" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                             <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-xl">AC</div>
+                             <div>
+                                 <h4 class="font-bold text-slate-800">Aida Castillo de Ugarte</h4>
+                                 <p class="text-xs text-slate-400 flex items-center gap-1"><i class="fa-solid fa-star text-brand-fun"></i> Recomendado</p>
+                             </div>
+                        </div>
+                        <i class="fa-brands fa-facebook text-blue-500 text-2xl opacity-50"></i>
+                    </div>
+                    <p class="text-slate-600 italic leading-relaxed mb-4">
+                        "Mi sala quedó impecable. Encantada con el servicio que realizó el Tecnico Rolando, muy profesional y capacitado, super organizado para trabajar, atento y honesto. Excelente tecnico Rolando Super recomendables 💯"
+                    </p>
+                     <div class="flex items-center justify-end text-sm text-red-500 font-bold gap-1">
+                        <i class="fa-solid fa-heart"></i> Me encanta
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="bg-white p-8 rounded-3xl shadow-card hover:shadow-lg transition duration-300 border border-slate-100" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                             <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-xl">BA</div>
+                             <div>
+                                 <h4 class="font-bold text-slate-800">Beatriz Amari Medina</h4>
+                                 <p class="text-xs text-slate-400 flex items-center gap-1"><i class="fa-solid fa-star text-brand-fun"></i> Recomendado</p>
+                             </div>
+                        </div>
+                        <i class="fa-brands fa-facebook text-blue-500 text-2xl opacity-50"></i>
+                    </div>
+                    <p class="text-slate-600 italic leading-relaxed mb-4">
+                        "Excelente servicio y puntualidad por parte de Rolando asi como las indicaciones del cuidado del colchón lo super super super recomiendo"
+                    </p>
+                     <div class="flex items-center justify-end text-sm text-red-500 font-bold gap-1">
+                        <i class="fa-solid fa-heart"></i> Me encanta
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FOOTER SIMPLE -->
+    <footer class="bg-slate-50 border-t border-slate-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+             <div class="flex justify-center items-center mb-6">
+                <!-- Logo Footer -->
+                <img src="./logo.webp" alt="LTC Logo" class="h-14 w-auto object-contain opacity-90 hover:opacity-100 transition duration-300">
+            </div>
+            <div class="mb-6 flex flex-col md:flex-row justify-center gap-4 text-sm font-medium text-slate-500">
+                 <button onclick="openLocationModal('phone')" class="hover:text-brand-cyan transition"><i class="fa-solid fa-phone"></i> Monterrey: 81 3639 5018</button>
+                 <span class="hidden md:inline">|</span>
+                 <button onclick="openLocationModal('phone')" class="hover:text-brand-cyan transition"><i class="fa-solid fa-phone"></i> Querétaro: 442 853 4242</button>
+            </div>
+            <p class="text-slate-400 text-sm mb-6">&copy; 2025 LTC. Todos los derechos reservados.</p>
+            <div class="flex justify-center gap-6">
+                <a href="https://facebook.com/limpiatucasamx" target="_blank" class="text-slate-400 hover:text-blue-600 text-2xl transition"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://instagram.com/limpiatucasamx" target="_blank" class="text-slate-400 hover:text-pink-600 text-2xl transition"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FAB (Floating WhatsApp) -->
+    <button onclick="openLocationModal('whatsapp')" class="fixed bottom-6 right-6 z-50 bg-whatsapp w-16 h-16 rounded-full flex items-center justify-center text-white text-3xl shadow-2xl hover:scale-110 transition duration-300 btn-whatsapp-pulse group">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="absolute right-full mr-4 bg-white text-slate-800 text-xs font-bold px-3 py-1 rounded shadow-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+            ¡Respondemos Rápido!
+        </span>
+    </button>
+
+    <!-- LOCATION MODAL -->
+    <div id="locationModal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity opacity-0" id="modalBackdrop"></div>
+
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <!-- Panel -->
+            <div class="relative transform overflow-hidden rounded-3xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" id="modalPanel">
+                
+                <div class="bg-brand-cyan px-4 py-6 sm:px-6 text-center relative overflow-hidden">
+                    <div class="absolute top-[-50%] left-[-20%] w-40 h-40 bg-white opacity-20 rounded-full blur-2xl"></div>
+                    <h3 class="font-heading font-black text-2xl text-white relative z-10" id="modal-title">
+                        ¿De dónde nos contactas? 📍
+                    </h3>
+                    <button onclick="closeLocationModal()" class="absolute top-4 right-4 text-white/80 hover:text-white transition">
+                        <i class="fa-solid fa-xmark text-2xl"></i>
+                    </button>
+                </div>
+
+                <div class="px-4 py-8 sm:px-8 space-y-4">
+                    <button onclick="selectLocation('mty')" class="w-full group bg-slate-50 hover:bg-brand-light border-2 border-slate-100 hover:border-brand-cyan/30 rounded-2xl p-4 flex items-center justify-between transition-all duration-300">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-brand-light group-hover:bg-white w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-sm">
+                                🏔️
+                            </div>
+                            <div class="text-left">
+                                <p class="font-bold text-slate-800 text-lg">Monterrey</p>
+                                <p class="text-xs text-slate-500">81 3639 5018</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-brand-cyan"></i>
+                    </button>
+
+                    <button onclick="selectLocation('qro')" class="w-full group bg-slate-50 hover:bg-brand-light border-2 border-slate-100 hover:border-brand-cyan/30 rounded-2xl p-4 flex items-center justify-between transition-all duration-300">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-brand-light group-hover:bg-white w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-sm">
+                                🏛️
+                            </div>
+                            <div class="text-left">
+                                <p class="font-bold text-slate-800 text-lg">Querétaro</p>
+                                <p class="text-xs text-slate-500">442 853 4242</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-brand-cyan"></i>
+                    </button>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
+        // Modal Logic
+        let currentContactType = ''; // 'whatsapp' or 'phone'
+
+        function openLocationModal(type) {
+            currentContactType = type;
+            const modal = document.getElementById('locationModal');
+            const backdrop = document.getElementById('modalBackdrop');
+            const panel = document.getElementById('modalPanel');
+
+            modal.classList.remove('hidden');
+            // Small delay to allow display:block to apply before opacity transition
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                panel.classList.remove('opacity-0', 'translate-y-4', 'sm:translate-y-0', 'sm:scale-95');
+                panel.classList.add('opacity-100', 'translate-y-0', 'sm:scale-100');
+            }, 10);
+        }
+
+        function closeLocationModal() {
+            const modal = document.getElementById('locationModal');
+            const backdrop = document.getElementById('modalBackdrop');
+            const panel = document.getElementById('modalPanel');
+
+            backdrop.classList.add('opacity-0');
+            panel.classList.remove('opacity-100', 'translate-y-0', 'sm:scale-100');
+            panel.classList.add('opacity-0', 'translate-y-4', 'sm:translate-y-0', 'sm:scale-95');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300); // Match transition duration
+        }
+
+        function selectLocation(city) {
+            let number = '';
+            if (city === 'mty') {
+                number = '528136395018'; 
+            } else {
+                number = '524428534242';
+            }
+
+            if (currentContactType === 'whatsapp') {
+                window.open(`https://wa.me/${number}?text=Hola,%20me%20interesa%20cotizar%20un%20servicio%20de%20limpieza%20🛋️`, '_blank');
+            } else {
+                window.location.href = `tel:+${number}`;
+            }
+            closeLocationModal();
+        }
+    </script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
